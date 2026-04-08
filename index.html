@@ -1,0 +1,275 @@
+<!DOCTYPE html>  <html lang="en">  
+<head>  
+  <meta charset="UTF-8">  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+  <title>Gilded Bloom Ultimate</title>  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">  
+  <style>  
+    *{margin:0;padding:0;box-sizing:border-box;}  
+
+    /* ✨ UPDATED SHINY BACKGROUND */
+    body{
+      font-family:Poppins,sans-serif;
+      background: linear-gradient(135deg, #fdf6f0, #f3e5f5, #e1bee7, #f8bbd0);
+      background-size: 400% 400%;
+      animation: gradientBG 10s ease infinite;
+      transition:0.3s;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    @keyframes gradientBG {
+      0%{background-position:0% 50%;}
+      50%{background-position:100% 50%;}
+      100%{background-position:0% 50%;}
+    }
+
+    /* ✨ GLITTER EFFECT */
+    body::before{
+      content:"";
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      pointer-events:none;
+      background-image:
+        radial-gradient(white 1px, transparent 1px),
+        radial-gradient(#fff5 1px, transparent 1px);
+      background-size: 60px 60px, 120px 120px;
+      animation: sparkle 6s linear infinite;
+      z-index:0;
+      opacity:0.6;
+    }
+
+    @keyframes sparkle{
+      from{background-position:0 0, 0 0;}
+      to{background-position:100px 200px, 200px 400px;}
+    }
+
+    body.dark{
+      background: linear-gradient(135deg,#1a1a1a,#2c2c2c,#121212);
+      background-size: 300% 300%;
+      animation: gradientBG 8s ease infinite;
+      color:#eee;
+    }
+
+    .notification{background:#ff4081;color:#fff;text-align:center;padding:8px 0;font-weight:bold;font-size:14px;}  
+    header{display:flex;justify-content:space-between;align-items:center;padding:10px 20px;background:#6a1b9a;color:#fff;flex-wrap:wrap;gap:10px;}  
+    .logo{display:flex;align-items:center;gap:10px;}  
+    .logo img{width:45px;border-radius:50%;}  
+    .social-links{display:flex;gap:10px;}  
+    .social-links a img{width:25px;transition:0.3s;}  
+    .social-links a img:hover{transform:scale(1.2);}  
+    .toggle{cursor:pointer;background:#fff;color:#6a1b9a;padding:6px 12px;border-radius:6px;}  
+    .search-bar{margin-top:10px;text-align:center;padding:10px;}  
+    .search-bar input{padding:8px 12px;width:80%;max-width:400px;border-radius:6px;border:1px solid #ccc;}  
+    .hero{text-align:center;padding:50px 20px;background:linear-gradient(135deg,#8e24aa,#ba68c8);color:#fff;}  
+    .section{padding:40px 20px;text-align:center;opacity:0;transform:translateY(40px);transition:0.6s;}  
+    .section.show{opacity:1;transform:translateY(0);}  
+    .folders{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:20px;}  
+    .folder{padding:10px 20px;background:#6a1b9a;color:#fff;border-radius:10px;cursor:pointer;transition:0.3s;}  
+    .folder:hover{transform:scale(1.1);}  
+    .products{display:none;}  
+    .cards{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;}  
+    .card{width:220px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 5px 10px rgba(0,0,0,0.2);transition:0.3s;display:flex;flex-direction:column;align-items:center;}  
+    body.dark .card{background:#1e1e1e;}  
+    .card:hover{transform:scale(1.05);}  
+    .card img{width:100%;height:180px;object-fit:cover;}  
+    .card h3{margin:10px 0 5px;}  
+    .price{color:#8e24aa;font-weight:bold;margin-bottom:10px;}  
+    .buy-btn{padding:8px 12px;background:#6a1b9a;color:#fff;border:none;border-radius:6px;cursor:pointer;transition:0.3s;text-decoration:none;margin-bottom:15px;}  
+    .buy-btn:hover{background:#8e24aa;}  
+    form{max-width:400px;margin:auto;display:flex;flex-direction:column;gap:10px;}  
+    input,textarea{padding:10px;border-radius:6px;border:1px solid #ccc;}  
+    button{padding:10px;border:none;background:#6a1b9a;color:#fff;cursor:pointer;border-radius:6px;}  
+    footer{text-align:center;padding:15px;background:#6a1b9a;color:#fff;margin-top:30px;}  
+    footer .social-links{justify-content:center;margin-top:10px;}  
+
+@media (max-width: 768px){  
+  header{flex-direction:column;text-align:center;}  
+  .card{width:90%;}  
+  .search-bar input{width:95%;}  
+}
+  </style>  
+</head>  
+<body>  
+
+<div class="notification">  
+  🌟 Free shipping on orders above Rs.5000! Limited time offer! 🌟  
+</div>  
+
+<header>  
+  <div class="logo">  
+    <img src="https://cdn-icons-png.flaticon.com/512/616/616494.png" alt="logo">  
+    <h2>Gilded Bloom</h2>  
+    <div class="social-links">  
+      <a href="https://www.instagram.com/yourusername" target="_blank">  
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">  
+      </a>  
+    </div>  
+  </div>  
+  <div class="toggle" onclick="toggleTheme()">Dark / Light</div>  
+</header>  
+
+<div class="search-bar">  
+  <input type="text" id="searchInput" placeholder="Search products..." onkeyup="searchProducts()">  
+</div>  
+
+<section class="hero">  
+  <h1>Gilded Bloom</h1>  
+  <p>Wear your dreams ✨</p>  
+</section>  
+
+<section class="section">  
+  <h2>About Us</h2>  
+  <p>Indulge in the art of elegance with our signature perfumes, dazzling jewelry, and stylish handbags—crafted to make every moment shine." ✨.</p>  
+</section>  
+
+<section class="section">  
+  <h2>Collections</h2>  
+  <div class="folders">  
+    <div class="folder" onclick="showCategory('jewelry')">Jewelry</div>  
+    <div class="folder" onclick="showCategory('bags')">Handbags</div>  
+    <div class="folder" onclick="showCategory('perfume')">Perfume</div>  
+  </div>  
+</section>  
+
+<div id="jewelry" class="products section">  
+  <h2>Jewelry</h2>  
+  <div class="folders">  
+    <div class="folder" onclick="filterJewelry('all')">All</div>  
+    <div class="folder" onclick="filterJewelry('gold')">Gold</div>  
+    <div class="folder" onclick="filterJewelry('silver')">Silver</div>  
+    <div class="folder" onclick="filterJewelry('diamond')">Diamond</div>  
+  </div>  
+  <div class="cards" id="jewelry-cards"></div>  
+</div>  
+
+<div id="bags" class="products section">  
+  <h2>Handbags</h2>  
+  <div class="cards" id="bags-cards"></div>  
+</div>  
+
+<div id="perfume" class="products section">  
+  <h2>Perfume</h2>  
+  <div class="cards" id="perfume-cards"></div>  
+</div>  
+
+<section class="section">  
+  <h2>Contact Us</h2>  
+  <form onsubmit="sendMsg(event)">  
+    <input type="text" placeholder="Your Name" required>  
+    <input type="email" placeholder="Your Email" required>  
+    <textarea placeholder="Your Message" required></textarea>  
+    <button type="submit">Send Message</button>  
+  </form>  
+</section>  
+
+<footer>  
+  <p> 2026 Gilded Bloom</p>  
+  <div class="social-links">  
+    <a href="https://www.instagram.com/yourusername" target="etherealvibes388">  
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">  
+    </a>  
+  </div>  
+</footer>  
+
+<script>  
+function toggleTheme() {  
+  document.body.classList.toggle('dark');  
+}  
+
+function showCategory(cat) {  
+  document.querySelectorAll('.products').forEach(p => p.style.display = "none");  
+  document.getElementById(cat).style.display = "block";  
+}  
+
+window.addEventListener('scroll', () => {  
+  document.querySelectorAll('.section').forEach(sec => {  
+    let top = sec.getBoundingClientRect().top;  
+    if (top < window.innerHeight - 50) sec.classList.add('show');  
+  });  
+});  
+
+window.addEventListener('load', () => {  
+  document.querySelectorAll('.section').forEach(sec => {  
+    let top = sec.getBoundingClientRect().top;  
+    if (top < window.innerHeight - 50) sec.classList.add('show');  
+  });  
+});  
+
+function sendMsg(e) {  
+  e.preventDefault();  
+  alert("Message sent successfully ✅");  
+}  
+
+function searchProducts() {  
+  const input = document.getElementById('searchInput').value.toLowerCase();  
+  document.querySelectorAll('.card').forEach(card => {  
+    const name = card.querySelector('h3').innerText.toLowerCase();  
+    card.style.display = name.includes(input) ? 'flex' : 'none';  
+  });  
+}  
+
+const jewelryProducts = [  
+  {name:"Gold Earrings", type:"gold", img:"https://images.pexels.com/photos/10983783/pexels-photo-10983783.jpeg", price:5000},  
+  {name:"Gold set (party wear)", type:"gold", img:"https://images.pexels.com/photos/1454171/pexels-photo-1454171.jpeg", price:7000},  
+  {name:"Diamond ring", type:"diamond", img:"https://images.pexels.com/photos/1927259/pexels-photo-1927259.jpeg", price:10000},  
+  {name:"couple ring", type:"gold", img:"https://images.pexels.com/photos/265856/pexels-photo-265856.jpeg", price:4000},  
+  {name:"Earrings", type:"silver", img:"https://images.pexels.com/photos/1413420/pexels-photo-1413420.jpeg", price:4500},  
+  {name:"dimond tops", type:"diamond", img:"https://images.pexels.com/photos/5370644/pexels-photo-5370644.jpeg", price:6000},  
+  {name:"Handchain", type:"silver", img:"https://images.pexels.com/photos/1191531/pexels-photo-1191531.jpeg", price:7000},  
+  {name:"Diamond Bracelet ", type:"diamond", img:"https://images.pexels.com/photos/265906/pexels-photo-265906.jpeg", price:15000},  
+  {name:"Diamond Bracelet", type:"diamond", img:"https://images.pexels.com/photos/5370708/pexels-photo-5370708.jpeg", price:12000},  
+  {name:"bestie's rings", type:"diamond", img:"https://images.pexels.com/photos/5370654/pexels-photo-5370654.jpeg", price:11000},  
+];  
+
+const bagProducts = [  
+  {name:"Luxury Bag 1", img:"https://images.pexels.com/photos/1152077/pexels-photo-1152077.jpeg", price:2500},  
+  {name:"Luxury Bag 2", img:"https://images.pexels.com/photos/904350/pexels-photo-904350.jpeg", price:2800},  
+  {name:"Luxury Bag 3", img:"https://images.pexels.com/photos/6301673/pexels-photo-6301673.jpeg", price:3000},  
+  {name:"Luxury Bag 4", img:"https://images.pexels.com/photos/5706278/pexels-photo-5706278.jpeg", price:3200},  
+  {name:"carry more lugage", img:"https://images.pexels.com/photos/2081199/pexels-photo-2081199.jpeg", price:3500},  
+  {name:"picnic bag", img:"https://images.pexels.com/photos/2905238/pexels-photo-2905238.jpeg", price:3800}  
+];  
+
+const perfumeProducts = [  
+  {name:"Perfume 1", img:"https://images.pexels.com/photos/965989/pexels-photo-965989.jpeg", price:1800},  
+  {name:"Perfume 2", img:"https://images.pexels.com/photos/1961792/pexels-photo-1961792.jpeg", price:2000},  
+  {name:"Perfume 3", img:"https://images.pexels.com/photos/3059609/pexels-photo-3059609.jpeg", price:2200},  
+  {name:"Perfume 4", img:"https://images.pexels.com/photos/4041392/pexels-photo-4041392.jpeg", price:2400},  
+  {name:"Perfume 5", img:"https://images.pexels.com/photos/1190829/pexels-photo-1190829.jpeg", price:2600},  
+];  
+
+function renderCards(products, containerId){  
+  const container = document.getElementById(containerId);  
+  container.innerHTML = '';  
+
+  products.forEach(item => {  
+    container.innerHTML += `  
+      <div class="card">  
+        <img src="${item.img}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/300x300?text=Image+Not+Found'">  
+        <h3>${item.name}</h3>  
+        <p class="price">Rs.${item.price}</p>  
+        <a href="https://wa.me/923001234567?text=I%20want%20to%20buy%20${encodeURIComponent(item.name)}%20for%20Rs.${item.price}" target="_blank" class="buy-btn">Buy / Details</a>  
+      </div>  
+    `;  
+  });  
+}  
+
+function filterJewelry(type){  
+  if(type === 'all'){  
+    renderCards(jewelryProducts, 'jewelry-cards');  
+  } else {  
+    renderCards(jewelryProducts.filter(item => item.type === type), 'jewelry-cards');  
+  }  
+}  
+
+renderCards(jewelryProducts, 'jewelry-cards');  
+renderCards(bagProducts, 'bags-cards');  
+renderCards(perfumeProducts, 'perfume-cards');  
+</script>  
+
+</body>  
+</html>
